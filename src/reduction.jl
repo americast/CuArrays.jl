@@ -80,7 +80,7 @@ end
 function Base.reduce(f, v0::T, xs::CuArray{T}) where T
   dim = reduce_cudim(length(xs))
   scratch = similar(xs, dim[2])
-  _reduce(f, v0, xs, scratch, dim)
+  @time _reduce(f, v0, xs, scratch, dim)
   return _getindex(scratch, 1)
 end
 
